@@ -32,7 +32,7 @@ require_once 'Zend/Controller/Action/Exception.php';
 /**
  * @see Zend_Cache_Manager
  */
-require_once 'Zend/Cache/Manager.php';
+require_once 'Zend/Cache/Managers.php';
 
 /**
  * @category   Zend

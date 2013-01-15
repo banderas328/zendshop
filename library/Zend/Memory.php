@@ -20,7 +20,7 @@
  */
 
 /** Zend_Memory_Exception */
-require_once 'Zend/Memory/Manager.php';
+require_once 'Zend/Memory/Managers.php';
 
 /** Zend_Memory_Value */
 require_once 'Zend/Memory/Value.php';

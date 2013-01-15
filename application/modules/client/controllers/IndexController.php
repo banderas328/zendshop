@@ -14,14 +14,15 @@ class Client_IndexController extends Zend_Controller_Action
     }
 
     public function listAction(){
-        $auth = Zend_Auth::getInstance();
-        $manager_number =  $auth->getIdentity()->number;
+        $manager = new Manager_Model_Managers();
+        $manager_number =   $manager->manager_number();
         $model = new Client_Model_Client();
         $list = $model->show_clients($manager_number);
         $this->view->list =$list;
 
 
     }
+
 
 
 }

@@ -10,7 +10,26 @@ class Order_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $form = new Order_Form_Order();
+        if ($this->_request->isPost())
+        {
+            if ($form->isValid($this->_request->getPost()))
+            {
+                die("cool");
+            }
+        }
+
+        $this->view->form = $form;
+
+    }
+
+    public function orderAction(){
+
+
+
+
+
+
     }
 
 
