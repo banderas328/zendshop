@@ -68,6 +68,7 @@
             $("#log").html( msg );
             $("#log").dialog({width:600,height:800});
             $('#orders').dataTable({
+                "sPaginationType": "four_button",
                 "oLanguage": {
                     "sLengthMenu": menu_entries ,
                     "sSearch": search  ,
@@ -153,7 +154,7 @@
          */
         "fnUpdate": function ( oSettings, fnCallbackDraw )
         {
-            $("#orders").remove();
+
             if ( !oSettings.aanFeatures.p )
             {
                 return;
