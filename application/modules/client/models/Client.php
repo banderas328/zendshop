@@ -29,15 +29,13 @@ class Client_Model_Client  extends Client_Model_DbTable_Clients
     {
         $manager_model = new Manager_Model_Managers();
         $manager_number = $manager_model->manager_number();
-        $select  = $this->_db->select()
-            ->from($this->_name,
-            array('key' => 'id','value' => 'first_name'));
-        $select->where("manager_number = ".$manager_number);
+        $select = $this->_db->select()->from($this->_name)->where("manager_number = ".$manager_number);
         $result = $this->getAdapter()->fetchAll($select);
-
-
-
-        return $result;
+        for($i = 0 ; $i < count($result);$i++) {
+            $list[$i]["key"] = $result[$i]["id"];
+            $list[$i]["value"] = $result[$i]["first_name"]."  ".$result[$i]["second_name"];
+        }
+        return $list;
     }
 
 

@@ -20,13 +20,16 @@ class User_Model_User
 
         // Perform the authentication query, saving the result
         $result = $auth->authenticate($authAdapter);
+        var_dump($result);
         if($result->isValid()){
+
 
             $data = $authAdapter->getResultRowObject(null,'password');
             $auth->getStorage()->write($data);
            return true;
 //            $this->redirect('index/index/index');
         }else{
+
             return false;
         }
 

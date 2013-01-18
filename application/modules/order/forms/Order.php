@@ -10,30 +10,34 @@ class Order_Form_Order extends Zend_Form
 {
 
     public function init() {
+        $translate = Default_IndexController::translateAction();
+        $this->setAction("/order/index/index")->setMethod("post")
+        ->setOptions(array("class" => "form-horizontal"));
 
-        $this->setAction("/order/index/index")->setMethod("post");
-
-        $product_name = new Zend_Form_Element_Text("product_name");
-        $product_name->setLabel("Product:")
+       $product_name = new Zend_Form_Element_Text("product_name");
+        $product_name->setLabel($translate->translate("product"))
             ->setOptions(array("size" => '30'))
             ->setRequired(true)
             ->addValidator('Alnum')
+            ->addErrorMessages(array('notAlnum'=>$translate->translate("validator_not_alphanum")))
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim');
 
         $sum = new Zend_Form_Element_Text("sum");
-        $sum->setLabel("Sum:")
+        $sum->setLabel($translate->translate("sum"))
             ->setOptions(array("size" => '30'))
             ->setRequired(true)
-            ->addValidator('Alnum')
+            ->addValidator('Digits')
+            ->addErrorMessages(array('notDigits'=>$translate->translate("validator_not_digits")))
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim');
 
         $price = new Zend_Form_Element_Text("price");
-        $price->setLabel("Price:")
+        $price->setLabel($translate->translate("price"))
             ->setOptions(array("size" => '30'))
             ->setRequired(true)
-            ->addValidator('Alnum')
+            ->addValidator('Digits')
+            ->addErrorMessages(array('notDigits'=>$translate->translate("validator_not_digits")))
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim');
 
@@ -42,10 +46,11 @@ class Order_Form_Order extends Zend_Form
         $client_list = $client_model->clients_for_order();
 
         $client = new Zend_Form_Element_Select("client");
-        $client->setLabel("Select Client");
+        $client->setLabel($translate->translate("select_client"));
         $client->addMultiOptions($client_list);
         $client->setRequired(true);
-        $client->addValidator('Digits');
+        $client->addValidator('Digits')
+        ->addErrorMessages(array('notDigits'=> $translate->translate("hack")));
         $client->addFilter('HtmlEntities');
 
 
@@ -53,8 +58,8 @@ class Order_Form_Order extends Zend_Form
 
 
         $submit  =  new Zend_Form_Element_Submit("submit");
-        $submit->setLabel("Create Order")
-            ->setOptions(array("class" => "submit"));
+        $submit->setLabel($translate->translate("create_order"))
+            ->setOptions(array("class" => "btn btn-warning"));
 
         $this->addElement($product_name)
             ->addElement($sum)

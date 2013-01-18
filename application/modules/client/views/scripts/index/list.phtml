@@ -1,5 +1,197 @@
-<?php foreach ($this->list as $key => $value){
-echo $value["id"]."#Name  :".$value["first_name"]."     #Second_name:   ".$value["second_name"]."
-   #Country:  ".$value["country"]."    #City:   ".$value["city"]."    #Phone:   ".$value["phone"]."    #   Email  ".$value["email"]."   # Manager  ".$value["manager_number"]."</br>";
+<table id="clients" class="table table-striped">
+    <thead>
+    <tr>
+        <td><?php echo $this->translate->translate("first_name");?></td>
+        <td><?php echo $this->translate->translate("second_name");?></td>
+        <td><?php echo $this->translate->translate("country");?></td>
+        <td><?php echo $this->translate->translate("city");?></td>
+        <td><?php echo $this->translate->translate("phone");?></td>
+        <td><?php echo $this->translate->translate("email");?></td>
+        </tr>
+    </thead>
 
-}?>
+    <tbody>
+    <?php $i = 2;
+    foreach ($this->list as $key => $value){
+
+   echo "<tr>";
+
+    echo "<td class=send client_id=".$value["id"].">".$value["first_name"]."</td>";
+    echo "<td>".$value["second_name"]."</td>";
+    echo "<td>".$value["country"]."</td>";
+    echo "<td>".$value["city"]."</td>";
+    echo "<td>".$value["phone"]."</td>";
+    echo "<td>".$value["email"]."</td>";
+}   echo "</tr>";
+    ?>
+    </tbody>
+
+</table>
+    <div id="log" title=<?php echo $this->translate->translate("orders_title"); ?> ></div>
+<!-- "<a href=".$this->baseUrl()."/order/index/orderlist/client/".$value["id"].">order list</a>"; -->
+<script type="text/javascript">
+    var next =    "<?php echo $this->translate->translate("datatable_next_page");?> ";
+    var prev =    "<?php echo $this->translate->translate("datatable_previus_page");?>";
+    var first =    "<?php echo $this->translate->translate("datatable_first_page");?>"
+    var last =    "<?php echo $this->translate->translate("datatable_last_page");?>";
+    var menu_entries  =    "<?php echo $this->translate->translate("show_menu_entries");?>";
+    var search  =     "<?php echo $this->translate->translate("form_search");?>";
+    var from_to =     "<?php echo $this->translate->translate("form_start_end");?>";
+
+    $(function( ){
+        console.info(next);
+        console.info(prev);
+        console.info(first);
+        console.info(last);
+
+    $('#clients').dataTable({
+        "sPaginationType": "four_button",
+        "oLanguage": {
+            "sLengthMenu": menu_entries ,
+            "sSearch": search  ,
+            "sInfo" : from_to
+
+
+        }});
+        $(".send").bind("click",show_orders)   ;
+    });
+    function show_orders(){
+
+        console.info($(this).attr("client_id"));
+        var request = $.ajax({
+            url: "/order/index/orderlist/",
+            type: "POST",
+            data: {client : $(this).attr("client_id") }
+
+        });
+        request.done(function(msg) {
+            $("#log").html( msg );
+            $("#log").dialog({width:600,height:800});
+            $('#orders').dataTable({
+                "oLanguage": {
+                    "sLengthMenu": menu_entries ,
+                    "sSearch": search  ,
+                    "sInfo" : from_to  ,
+                    "oPaginate": {
+                        "sNext": next,
+                        "sPrevious": prev
+                    }
+               }
+            });
+            $("#orders_previous").addClass("btn btn-warning");
+            $("#orders_next").addClass("btn btn-warning");
+
+            });
+
+
+    }
+    $.fn.dataTableExt.oPagination.four_button = {
+        /*
+         * Function: oPagination.four_button.fnInit
+         * Purpose:  Initalise dom elements required for pagination with a list of the pages
+         * Returns:  -
+         * Inputs:   object:oSettings - dataTables settings object
+         *           node:nPaging - the DIV which contains this pagination control
+         *           function:fnCallbackDraw - draw function which must be called on update
+         */
+        "fnInit": function ( oSettings, nPaging, fnCallbackDraw )
+        {
+            nFirst = document.createElement( 'span' );
+            nPrevious = document.createElement( 'span' );
+            nNext = document.createElement( 'span' );
+            nLast = document.createElement( 'span' );
+
+            nFirst.appendChild( document.createTextNode( first ) );
+            nPrevious.appendChild( document.createTextNode( prev ) );
+            nNext.appendChild( document.createTextNode( next ) );
+            nLast.appendChild( document.createTextNode( last ) );
+
+            nFirst.className = "btn btn-warning";
+            nPrevious.className = "btn btn-warning";
+            nNext.className="btn btn-warning";
+            nLast.className = "btn btn-warning";
+
+            nPaging.appendChild( nFirst );
+            nPaging.appendChild( nPrevious );
+            nPaging.appendChild( nNext );
+            nPaging.appendChild( nLast );
+
+            $(nFirst).click( function () {
+                oSettings.oApi._fnPageChange( oSettings, "first" );
+                fnCallbackDraw( oSettings );
+            } );
+
+            $(nPrevious).click( function() {
+                oSettings.oApi._fnPageChange( oSettings, "previous" );
+                fnCallbackDraw( oSettings );
+            } );
+
+            $(nNext).click( function() {
+                oSettings.oApi._fnPageChange( oSettings, "next" );
+                fnCallbackDraw( oSettings );
+            } );
+
+            $(nLast).click( function() {
+                oSettings.oApi._fnPageChange( oSettings, "last" );
+                fnCallbackDraw( oSettings );
+            } );
+
+            /* Disallow text selection */
+            $(nFirst).bind( 'selectstart', function () { return false; } );
+            $(nPrevious).bind( 'selectstart', function () { return false; } );
+            $(nNext).bind( 'selectstart', function () { return false; } );
+            $(nLast).bind( 'selectstart', function () { return false; } );
+            $(".send").bind("click",show_orders)   ;
+        },
+
+        /*
+         * Function: oPagination.four_button.fnUpdate
+         * Purpose:  Update the list of page buttons shows
+         * Returns:  -
+         * Inputs:   object:oSettings - dataTables settings object
+         *           function:fnCallbackDraw - draw function which must be called on update
+         */
+        "fnUpdate": function ( oSettings, fnCallbackDraw )
+        {
+            $("#orders").remove();
+            if ( !oSettings.aanFeatures.p )
+            {
+                return;
+            }
+
+            /* Loop over each instance of the pager */
+            var an = oSettings.aanFeatures.p;
+            for ( var i=0, iLen=an.length ; i<iLen ; i++ )
+            {
+                var buttons = an[i].getElementsByTagName('span');
+                if ( oSettings._iDisplayStart === 0 )
+                {
+                    buttons[0].className = "btn btn-warning";
+                    buttons[1].className = "btn btn-warning";
+                }
+                else
+                {
+                    buttons[0].className = "btn btn-warning";
+                    buttons[1].className = "btn btn-warning";
+                }
+
+                if ( oSettings.fnDisplayEnd() == oSettings.fnRecordsDisplay() )
+                {
+                    buttons[2].className = "btn btn-warning";
+                    buttons[3].className = "btn btn-warning";
+                }
+                else
+                {
+                    buttons[2].className = "btn btn-warning";
+                    buttons[3].className = "btn btn-warning";
+                }
+            }
+            $(".send").bind("click",show_orders);
+
+
+        }
+    };
+
+
+
+    </script>

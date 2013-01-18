@@ -2,26 +2,17 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-   /* protected $_front;
+    protected function _initLocale(){
+        $session = new Zend_Session_Namespace("zendshop.locale");
+        if($session->locale){
 
-
-    public function _initAutoload()
-    {
-        /*$loader = Zend_Loader_Autoloader::getInstance();
-
-        //or for multiple namespaces
-        $loader->registerNamespace(array('Custom_',));
+            $locale = new Zend_locale($session->locale);
+        }
+        if (!isset($locale)){
+            $locale = "ru";
+        }
+        $registry = Zend_Registry::getInstance();
+        $registry->set("Zend_Locale",$locale);
     }
-    protected function _bootstrap()
-    {                                      /*
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->registerNamespace('Custom_');
-        $front = Zend_Controller_Front::getInstance();
-        $acl = new Custom_Acl();
-        $front->registerPlugin(new $acl);
-
-
-    }  */
-
 }
 
