@@ -1,34 +1,23 @@
 <table id="clients" class="table table-striped">
     <thead>
     <tr>
-        <td><?php echo $this->translate->translate("first_name");?></td>
-        <td><?php echo $this->translate->translate("second_name");?></td>
-        <td><?php echo $this->translate->translate("country");?></td>
         <td><?php echo $this->translate->translate("city");?></td>
-        <td><?php echo $this->translate->translate("phone");?></td>
-        <td><?php echo $this->translate->translate("email");?></td>
-        </tr>
+        <td><?php echo $this->translate->translate("orders_sum");?></td>
+    </tr>
     </thead>
 
     <tbody>
     <?php $i = 2;
     foreach ($this->list as $key => $value){
-
-   echo "<tr>";
-
-    echo "<td class=send client_id=".$value["id"].">".$value["first_name"]."</td>";
-    echo "<td>".$value["second_name"]."</td>";
-    echo "<td>".$value["country"]."</td>";
-    echo "<td>".$value["city"]."</td>";
-    echo "<td>".$value["phone"]."</td>";
-    echo "<td>".$value["email"]."</td>";
-}   echo "</tr>";
+        echo "<tr>";
+        echo "<td class=city>".$value["city"]."</td>";
+        echo "<td>".$value["order_sum"]."</td>";
+    }   echo "</tr>";
     ?>
     </tbody>
 
 </table>
-    <div id="log" title=<?php echo $this->translate->translate("orders_title"); ?> ></div>
-<!-- "<a href=".$this->baseUrl()."/order/index/orderlist/client/".$value["id"].">order list</a>"; -->
+<div id="log" title="<?php echo $this->translate->translate("orders_title"); ?>"></div>
 <script type="text/javascript" src="/js/four_button.js"></script>
 <script type="text/javascript">
     var next =    "<?php echo $this->translate->translate("datatable_next_page");?> ";
@@ -38,26 +27,17 @@
     var menu_entries  =    "<?php echo $this->translate->translate("show_menu_entries");?>";
     var search  =     "<?php echo $this->translate->translate("form_search");?>";
     var from_to =     "<?php echo $this->translate->translate("form_start_end");?>";
-
-    $(function( ){
-
-    $('#clients').dataTable({
-        "sPaginationType": "four_button",
-        "oLanguage": {
-            "sLengthMenu": menu_entries ,
-            "sSearch": search  ,
-            "sInfo" : from_to
+    $(function(){
+        $(".city").bind("click",show_orders);
 
 
-        }});
-        $(".send").bind("click",show_orders)   ;
     });
-    function show_orders(){
+    function show_orders (){
 
         var request = $.ajax({
-            url: "/order/index/orderlist/",
+            url: "/order/index/orderscity/",
             type: "POST",
-            data: {client : $(this).attr("client_id") }
+            data: {city : $(this).text() }
 
         });
         request.done(function(msg) {
@@ -73,17 +53,11 @@
                         "sNext": next,
                         "sPrevious": prev
                     }
-               }
+                }
             });
-           // $("#orders_previous").addClass("btn btn-warning");
-          //  $("#orders_next").addClass("btn btn-warning");
-
-            });
+        });
 
 
     }
 
-
-
-
-    </script>
+</script>

@@ -28,6 +28,7 @@ $secondary_table = new Order_Model_DbTable_OrderChild();
 public function order_list($client_code){
 
     $dbAdapter = Zend_Db_Table::getDefaultAdapter();
+    $client_code = $dbAdapter->quote($client_code);
     $select = $dbAdapter->select();
     $select->from("order")
         ->joinLeft(array("orders_child"),'order.id = orders_child.order_id')
@@ -38,6 +39,56 @@ public function order_list($client_code){
 
 
 }
+
+    public function country_list() {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $sql = "SELECT country, count( client_code ) AS number
+                FROM clients
+                JOIN `order` ON clients.id = order.client_code
+                GROUP BY country
+                ORDER BY number DESC";
+        $rows = $db->fetchAll($sql);
+        return $rows;
+    }
+
+    public function orderscountry_list($country){
+
+        $dbAdapter = Zend_Db_Table::getDefaultAdapter();
+        $country = $dbAdapter->quote($country);
+        $sql = "SELECT *
+        FROM clients
+        JOIN `order` ON clients.id = order.client_code
+        JOIN `orders_child` ON order.id = orders_child.order_id
+        WHERE clients.country = ".$country.";";
+        $rows =   $dbAdapter->fetchAll($sql);
+        return $rows;
+    }
+    public function orderscity_list($city){
+
+        $dbAdapter = Zend_Db_Table::getDefaultAdapter();
+        $city = $dbAdapter->quote($city);
+        $sql = "SELECT *
+        FROM clients
+        JOIN `order` ON clients.id = order.client_code
+        JOIN `orders_child` ON order.id = orders_child.order_id
+        WHERE clients.city = ".$city.";";
+        $rows =   $dbAdapter->fetchAll($sql);
+        return $rows;
+    }
+    public function ordercityes_list(){
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $sql = "SELECT city, sum( sum ) AS order_sum
+        FROM clients
+        JOIN `order` ON clients.id = order.client_code
+        GROUP BY city
+        ORDER BY order_sum DESC";
+        $rows = $db->fetchAll($sql);
+        return $rows;
+
+
+    }
+
 
 }
 

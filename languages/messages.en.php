@@ -33,7 +33,13 @@ return array (
     "form_start_end" => "Showing _START_ to _END_ of _TOTAL_ entries",
     "have_no_orders" => "No Orders"  ,
     "client_code" => "Client Code"  ,
-    "orders_title" => "Orders"
+    "orders_title" => "Orders" ,
+    "reports_country" => "Countries Reports" ,
+    "reports_city" => "Cityes Reports" ,
+    "orders_count" => "Orders Count" ,
+    "orders_sum" => "Orders Sum" ,
+    "twitts" => "Twitter" ,
+    "ebay" => "Ebay" ,
 
 );
 

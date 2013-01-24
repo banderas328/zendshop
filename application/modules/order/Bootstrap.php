@@ -8,10 +8,7 @@ class Order_Bootstrap extends Zend_Application_Module_Bootstrap
             'namespace' => 'Order_',
             'basePath' => dirname(__FILE__),
         ));
-
         // Add resource type for Module Api
-
-
         return $autoloader;
     }
 }

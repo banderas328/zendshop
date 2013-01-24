@@ -1,5 +1,31 @@
-<br /><br />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="ltr" lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>DEMO SHOP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta http-equiv="Content-Language" content="ru,en">
+    <meta name="distribution" content="GLOBAL">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl('bootstrap/css/bootstrap.css'); ?> ">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl('css/styles.css'); ?> ">
+
+
+
+</head>
+<body>
+ <div class="span3" id="lang">
+<a href="<?php echo $this->url(array("module"=>"default",
+    "controller"=>"index",
+    "action"=>"locale","locale" => "ru","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/ru.png");?> /></a>
+<a href="<?php echo $this->url(array("module"=>"default",
+    "controller"=>"index",
+    "action"=>"locale","locale" => "en","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/en.jpg");?> /></a>
+ </div>
+<div class="container" id="login">
+
 <?echo $this->message[0] ;?>
 <div id="view-content">
    <?php echo $this->form;?>
 </div>
+    </div>
+</body>
+</html>

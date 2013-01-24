@@ -7,6 +7,7 @@
     <meta name="distribution" content="GLOBAL">
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl('bootstrap/css/bootstrap.css'); ?> ">
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl('jquery-ui/css/ui-lightness/styles.css'); ?> ">
+    <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl('css/styles.css'); ?> ">
     <script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery.dataTables.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo $this->baseUrl('jquery-ui/js/jquery-ui.js'); ?>"></script>
@@ -18,12 +19,14 @@
              <li> <a href="<?php echo $this->baseUrl(); ?>/user/index/login" /><?php echo $this->translate->translate("log_in");?></a></li>
              <li><a href="<?php echo $this->baseUrl(); ?>/client/index/list" ><?php echo $this->translate->translate("clients_list");?></a></li>
              <li><a href="<?php echo $this->baseUrl(); ?>/order/index/index" ><?php echo $this->translate->translate("add_order");?></a></li>
+             <li><a href="<?php echo $this->baseUrl(); ?>/order/index/country" ><?php echo $this->translate->translate("reports_country");?></a></li>
+             <li><a href="<?php echo $this->baseUrl(); ?>/order/index/city" ><?php echo $this->translate->translate("reports_city");?></a></li>
              <li><a href="<?php echo $this->url(array("module"=>"default",
-                                             "controller"=>"locale",
-                                              "action"=>"index","locale" => "ru","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/ru.png");?> /></a></li>
+                                             "controller"=>"index",
+                                              "action"=>"locale","locale" => "ru","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/ru.png");?> /></a></li>
              <li><a href="<?php echo $this->url(array("module"=>"default",
-                 "controller"=>"locale",
-                 "action"=>"index","locale" => "en","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/en.jpg");?> /></a></li>
+                 "controller"=>"index",
+                 "action"=>"locale","locale" => "en","default",true)); ?>"><img src=<?php echo $this->baseUrl("pictures/en.jpg");?> /></a></li>
 
          </ul>
      </div>

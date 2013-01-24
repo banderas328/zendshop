@@ -42,20 +42,14 @@ class Order_Form_Order extends Zend_Form
             ->addFilter('StringTrim');
 
          $client_model = new Client_Model_Client();
-        $client_list = $client_model->show_clients();
-        $client_list = $client_model->clients_for_order();
-
-        $client = new Zend_Form_Element_Select("client");
+         $client_list = $client_model->clients_for_order();
+         $client = new Zend_Form_Element_Select("client");
         $client->setLabel($translate->translate("select_client"));
         $client->addMultiOptions($client_list);
         $client->setRequired(true);
         $client->addValidator('Digits')
         ->addErrorMessages(array('notDigits'=> $translate->translate("hack")));
         $client->addFilter('HtmlEntities');
-
-
-
-
 
         $submit  =  new Zend_Form_Element_Submit("submit");
         $submit->setLabel($translate->translate("create_order"))

@@ -1,0 +1,96 @@
+<table id="clients" class="table table-striped">
+    <thead>
+    <tr>
+        <td><?php echo $this->translate->translate("country");?></td>
+        <td><?php echo $this->translate->translate("orders_count");?></td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <?php $i = 2;
+    foreach ($this->countries as $key => $value){
+        echo "<tr>";
+        echo "<td class=country>".$value["country"]."</td>";
+        echo "<td>".$value["number"]."</td>";
+    }   echo "</tr>";
+    ?>
+    </tbody>
+
+</table>
+    <div id="log" title="<?php echo $this->translate->translate("orders_title"); ?>"></div>
+    <div id="twitts" title="<?php echo $this->translate->translate("twitts");?>"></div>
+<div id="ebay" title="<?php echo $this->translate->translate("ebay");?>"></div>
+<script type="text/javascript" src="/js/four_button.js"></script>
+    <script type="text/javascript">
+        var next =    "<?php echo $this->translate->translate("datatable_next_page");?> ";
+        var prev =    "<?php echo $this->translate->translate("datatable_previus_page");?>";
+        var first =    "<?php echo $this->translate->translate("datatable_first_page");?>"
+        var last =    "<?php echo $this->translate->translate("datatable_last_page");?>";
+        var menu_entries  =    "<?php echo $this->translate->translate("show_menu_entries");?>";
+        var search  =     "<?php echo $this->translate->translate("form_search");?>";
+        var from_to =     "<?php echo $this->translate->translate("form_start_end");?>";
+        $(function(){
+        $(".country").bind("click",show_orders);
+
+
+        });
+        function show_orders (){
+
+            var request = $.ajax({
+                url: "/order/index/orderscountry/",
+                type: "POST",
+                data: {country : $(this).text() }
+
+            });
+            request.done(function(msg) {
+                $("#log").html( msg );
+                $("#log").dialog({width:1000,height:800});
+                $('#orders').dataTable({
+                    "sPaginationType": "four_button",
+                    "oLanguage": {
+                        "sLengthMenu": menu_entries ,
+                        "sSearch": search  ,
+                        "sInfo" : from_to  ,
+                        "oPaginate": {
+                            "sNext": next,
+                            "sPrevious": prev
+                        }
+                    }
+                });
+                $(".product").bind("click",show_ebay);
+
+            });
+         var request_twitter = $.ajax({
+                url: "/order/index/twitter/",
+                type: "POST",
+                data: {word : $(this).text() }
+
+            });
+            request_twitter.done(function(msg) {
+                $("#twitts").html( msg );
+                $("#twitts").dialog({width:600,height:800, position:[50,50]});
+
+            });
+
+
+
+
+
+
+        }
+        function show_ebay(){
+        var request_ebay = $.ajax({
+                url: "/order/index/ebay/",
+                type: "POST",
+                data: {word : $(this).text() }
+
+            });
+            request_ebay.done(function(msg) {
+                $("#ebay").html( msg );
+                $("#ebay").dialog({width:600,height:800, position:[750,50]});
+
+            });
+
+        }
+
+    </script>

@@ -33,7 +33,13 @@ return array (
     "form_start_end" => "Показывает с _START_ по _END_ из _TOTAL_ записей"   ,
     "have_no_orders" => "Нет Заказов",
     "client_code" => "Код клиента" ,
-    "orders_title" => "Заказы"
+    "orders_title" => "Заказы" ,
+    "reports_country" => "Отчет по странам" ,
+    "reports_city" => "Отчет по городам" ,
+    "orders_count" => "Количество Заказов"  ,
+    "orders_sum" => "Сумма заказов" ,
+    "twitts" => "Твитер"   ,
+    "ebay" => "Ебэй" ,
 
 );
 
