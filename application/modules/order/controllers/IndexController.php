@@ -79,7 +79,9 @@ class Order_IndexController extends Default_IndexController
        $result =  $ebay->findItemsByKeywords( $word = $this->_request->getParam("word"));
         $list = array();
         for($i = 0;$i < 10 ; $i++) {
+            if(isset($result->searchResult->item->current()->title))
             $list[$i]["title"] =  $result->searchResult->item->current()->title;
+            if(isset( $result->searchResult->item->current()->galleryURL))
             $list[$i]["img"] =  $result->searchResult->item->current()->galleryURL;
             $result->searchResult->item->next();
         }
