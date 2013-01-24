@@ -1,7 +1,10 @@
+<table id="orders" class="table table-striped">
+
 <?php
 foreach($this->list as $key => $value)
 {
-   echo "<p>".$key."#".$value["text"]."</p>";
+   echo "<tr><td>".$value["text"]."</td></tr>";
 }
 
 ?>
+    </table>

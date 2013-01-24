@@ -35,7 +35,7 @@ return array (
     "client_code" => "Client Code"  ,
     "orders_title" => "Orders" ,
     "reports_country" => "Countries Reports" ,
-    "reports_city" => "Cityes Reports" ,
+    "reports_city" => "Cities Reports" ,
     "orders_count" => "Orders Count" ,
     "orders_sum" => "Orders Sum" ,
     "twitts" => "Twitter" ,
