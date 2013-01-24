@@ -45,6 +45,7 @@
             request.done(function(msg) {
                 $("#log").html( msg );
                 $("#log").dialog({width:1000,height:800});
+                $(".product").bind("click",show_ebay);
                 $('#orders').dataTable({
                     "sPaginationType": "four_button",
                     "oLanguage": {
@@ -57,7 +58,9 @@
                         }
                     }
                 });
-                $(".product").bind("click",show_ebay);
+
+
+
 
             });
          var request_twitter = $.ajax({
