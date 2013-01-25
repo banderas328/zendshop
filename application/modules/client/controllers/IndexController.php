@@ -1,6 +1,6 @@
 <?php
-require_once APPLICATION_PATH."/modules/default/controllers/IndexController.php";
-class Client_IndexController extends Default_IndexController
+
+class Client_IndexController extends Custom_Base
 {
 
     public function listAction(){
@@ -8,7 +8,6 @@ class Client_IndexController extends Default_IndexController
         $manager_number =   $manager->manager_number();
         $model = new Client_Model_Client();
         $list = $model->show_clients($manager_number);
-        $this->view->translate = Default_IndexController::translateAction();
         $this->view->list =$list;
     }
 

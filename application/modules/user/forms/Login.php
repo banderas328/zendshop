@@ -10,7 +10,7 @@ class User_Form_Login extends Zend_Form
 {
 
     public function init() {
-        $translate = Default_IndexController::translateAction();
+        $translate = Custom_Base::translateAction();
         $this->setAction("/user/index/auth")->setMethod("post")
         ->setOptions(array("class"=>"form-horizontal"));
 

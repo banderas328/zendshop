@@ -1,8 +1,8 @@
 <table id="clients" class="table table-striped">
     <thead>
     <tr>
-        <td><?php echo $this->translate->translate("city");?></td>
-        <td><?php echo $this->translate->translate("orders_sum");?></td>
+        <td><?php echo $this->translate("city");?></td>
+        <td><?php echo $this->translate("orders_sum");?></td>
     </tr>
     </thead>
 
@@ -17,17 +17,17 @@
     </tbody>
 
 </table>
-<div id="log" title="<?php echo $this->translate->translate("orders_title"); ?>"></div>
-<div id="ebay" title="<?php echo $this->translate->translate("ebay"); ?>"></div>
+<div id="log" title="<?php echo $this->translate("orders_title"); ?>"></div>
+<div id="ebay" title="<?php echo $this->translate("ebay"); ?>"></div>
 <script type="text/javascript" src="/js/four_button.js"></script>
 <script type="text/javascript">
-    var next =    "<?php echo $this->translate->translate("datatable_next_page");?> ";
-    var prev =    "<?php echo $this->translate->translate("datatable_previus_page");?>";
-    var first =    "<?php echo $this->translate->translate("datatable_first_page");?>"
-    var last =    "<?php echo $this->translate->translate("datatable_last_page");?>";
-    var menu_entries  =    "<?php echo $this->translate->translate("show_menu_entries");?>";
-    var search  =     "<?php echo $this->translate->translate("form_search");?>";
-    var from_to =     "<?php echo $this->translate->translate("form_start_end");?>";
+    var next =    "<?php echo $this->translate("datatable_next_page");?> ";
+    var prev =    "<?php echo $this->translate("datatable_previus_page");?>";
+    var first =    "<?php echo $this->translate("datatable_first_page");?>"
+    var last =    "<?php echo $this->translate("datatable_last_page");?>";
+    var menu_entries  =    "<?php echo $this->translate("show_menu_entries");?>";
+    var search  =     "<?php echo $this->translate("form_search");?>";
+    var from_to =     "<?php echo $this->translate("form_start_end");?>";
     $(function(){
         $(".city").bind("click",show_orders);
         $(".send").bind("click",false);
