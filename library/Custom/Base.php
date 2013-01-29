@@ -9,10 +9,15 @@
 class Custom_Base extends Zend_Controller_Action {
 
     public function preDispatch(){
-        if (!Zend_Auth::getInstance()->hasIdentity()){$this->redirect("/user/index/login");}
+        if (!Zend_Auth::getInstance()->hasIdentity() && ($this->getRequest()->getActionName() != "locale")){$this->redirect("/user/index/login");}
         $layout = Zend_Layout::getMvcInstance();
         $view = $layout->getView();
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        $viewRenderer->initView();
+        $viewRenderer->view->doctype('XHTML1_STRICT');
         if($this->_request->isXmlHttpRequest()){  $this->_helper->layout()->disableLayout();}
+
+
         $view->translate = $this->translateAction();
     }
 
@@ -31,7 +36,6 @@ class Custom_Base extends Zend_Controller_Action {
         $translate = new Zend_Translate_Adapter_Array(APPLICATION_PATH."/../languages/messages.en.php","en");
         $translate->addTranslation(APPLICATION_PATH."/../languages/messages.ru.php","ru");
         $translate->setLocale(Zend_Registry::get("Zend_Locale"));
-
         $registry = Zend_Registry::getInstance();
         $registry->set('Zend_Translate',$translate);
         return $translate;

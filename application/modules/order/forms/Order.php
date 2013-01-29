@@ -10,7 +10,7 @@ class Order_Form_Order extends Zend_Form
 {
 
     public function init() {
-        $translate = Custom_Base::translateAction();
+        $translate = Default_TranslateController::translateAction();
         $this->setAction("/order/index/index")->setMethod("post")
         ->setOptions(array("class" => "form-horizontal"));
 

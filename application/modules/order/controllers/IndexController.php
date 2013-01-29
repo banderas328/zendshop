@@ -54,15 +54,12 @@ class Order_IndexController extends Custom_Base
         $flickr = new Zend_Service_Flickr( $config->flickr->key);
         $results = $flickr->tagSearch($word);
         return $results->current()->Medium->uri;
-
-
     }
     public function twitterAction(){
         $word = $this->_request->getParam("word");
         $twitterSearch  = new Zend_Service_Twitter_Search('json');
         $searchResults  = $twitterSearch->search($word , array('lang' => 'en'));
         $this->view->list =  $searchResults["results"];
-
     }
     public function ebayAction(){
         $config = Zend_Registry::get("config");
@@ -71,9 +68,9 @@ class Order_IndexController extends Custom_Base
         $list = array();
         $i = 0;
         foreach ($result->searchResult->item as $item) {
-         $list[$i]["title"] = $item->title;
-         $list[$i]["img"] = $item->galleryURL;
-         $i++;
+            $list[$i]["title"] = $item->title;
+            $list[$i]["img"] = $item->galleryURL;
+            $i++;
         }
         $this->view->list = $list;
 }
