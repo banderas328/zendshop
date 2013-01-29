@@ -21,13 +21,10 @@ class User_IndexController extends Zend_Controller_Action
              $flashMessenger->addMessage($translate->translate("access_denied"));
              $urlOptions = array("module" => "user" ,'controller'=>'index', 'action'=>'login' );
              $this->_helper->redirector->gotoRoute($urlOptions);
-
-             $this->redirect("/user/index/login");
         }
         else {
             $urlOptions = array("module" => "client" ,'controller'=>'index', 'action'=>'list' );
             $this->_helper->redirector->gotoRoute($urlOptions);
-            $this->redirect("/client/index/list");
         }
 	}
 
