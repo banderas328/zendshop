@@ -39,7 +39,6 @@ class Order_IndexController extends Custom_Base
     public function cityAction(){
         $model = new Order_Model_Order();
         $list = $model->ordercityes_list();
-        $this->view->translate = Custom_Base::translateAction();
         $this->view->list = $list;
     }
     public function orderscityAction(){
